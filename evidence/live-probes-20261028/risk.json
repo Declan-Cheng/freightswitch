@@ -1,0 +1,79 @@
+{
+  "case": "risk",
+  "provider": "Nebius Token Factory",
+  "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+  "syntheticOnly": true,
+  "sourceIds": [
+    "m05",
+    "m07",
+    "m08"
+  ],
+  "realNetworkAttempt": true,
+  "expected": [
+    {
+      "messageId": "m05",
+      "kind": "propose",
+      "version": "v2"
+    },
+    {
+      "messageId": "m07",
+      "kind": "received",
+      "version": "v2"
+    },
+    {
+      "messageId": "m08",
+      "kind": "accept",
+      "version": "v1"
+    }
+  ],
+  "limitation": "Authored known cases; advisory wording classification, not sender authenticity, rerouting, delivery or general model accuracy.",
+  "validationPassed": true,
+  "result": {
+    "mode": "live",
+    "realInference": true,
+    "transport": "Nebius HTTPS",
+    "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+    "usage": {
+      "completion_tokens": 1767,
+      "prompt_tokens": 568,
+      "total_tokens": 2335,
+      "completion_tokens_details": null,
+      "prompt_tokens_details": null
+    },
+    "proposalOnly": true,
+    "observations": [
+      {
+        "messageId": "m05",
+        "kind": "propose",
+        "version": "v2",
+        "quote": "I propose shipment FS-1042 / v2. Deliver to 88 Birch Avenue, Warehouse B, Gate 4 at 2026-10-27T11:30:00-04:00.",
+        "confidence": 0.95,
+        "explanation": "The message explicitly proposes shipment FS-1042 with version v2 and includes delivery details.",
+        "evidenceSHA256": "39502eea33ef4422e38b2f1500609672ec73876c41bb65f5621f99e6c3645573"
+      },
+      {
+        "messageId": "m07",
+        "kind": "received",
+        "version": "v2",
+        "quote": "I received, but have NOT accepted shipment FS-1042 / v2. Request m05.",
+        "confidence": 0.9,
+        "explanation": "The sender states they have received but not accepted the shipment and are requesting m05.",
+        "evidenceSHA256": "ff61663f9fbc064453432721ebe417f05255e77bb7c547ab265f9ddfebd7b385"
+      },
+      {
+        "messageId": "m08",
+        "kind": "accept",
+        "version": "v1",
+        "quote": "I explicitly accept shipment FS-1042 / v1. Request m01. Deliver to 14 Cedar Lane, Warehouse A, Gate 1 at 2026-10-27T09:00:00-04:00.",
+        "confidence": 0.95,
+        "explanation": "The sender explicitly accepts shipment FS-1042 version v1 and requests m01, with alternative delivery details.",
+        "evidenceSHA256": "7bb5faf040d7a27a052b65f739faecba05d0c008d15c207c7053106e62b166ce"
+      }
+    ],
+    "questions": [
+      "Which version of shipment FS-1042 do you intend to accept?"
+    ]
+  },
+  "authoredLabelsMatch": true,
+  "elapsedSeconds": 16.163
+}

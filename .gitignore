@@ -1,0 +1,9 @@
+.secrets/
+.runtime/
+.env
+.env.*
+__pycache__/
+*.pyc
+*.sqlite
+*.sqlite-*
+.DS_Store

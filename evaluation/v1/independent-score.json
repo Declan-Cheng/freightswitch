@@ -1,0 +1,28 @@
+{
+  "snapshot": "frozen v1.3 independent evaluation",
+  "attemptsSHA256": "d6b72e8cd0fe8343e09d6dc2ebd6d1b2e21c7d092cd2ec3e97a7815fbda48e69",
+  "strictCompleteCases": {
+    "pass": 0,
+    "total": 18
+  },
+  "strictCompleteObservations": {
+    "pass": 0,
+    "total": 28
+  },
+  "fixedRulesBaseline": {
+    "cases": {
+      "pass": 15,
+      "total": 18
+    },
+    "observations": {
+      "pass": 25,
+      "total": 28
+    }
+  },
+  "returnedObservations": 17,
+  "criticalFailure": "Returned evidence consisted of version tokens, not words supporting the proposed action. Ambiguous OK was falsely accepted without clarification.",
+  "truncations": 3,
+  "validationRejections": 1,
+  "source": "Independent scoring brief supplied by parent; gold/scorer not accessed by builder",
+  "scope": "Not a claim that every intent label was wrong. Old score remains unchanged. New development tests are not a new independent evaluation."
+}

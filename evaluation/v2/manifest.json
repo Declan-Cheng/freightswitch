@@ -1,0 +1,39 @@
+{
+  "buildId": "FS-1.4-5b89358e62a4",
+  "sourceDigest": "5b89358e62a4b76b5b8efeb89ba26402b6057f859bd1da7066ff3823514f37e7",
+  "inputSHA256": "ff005fcee2bc1517951acdfda4a06c6eb26d96303903c270e0025f4f58452c24",
+  "inputCases": 12,
+  "inputBytes": 7486,
+  "providerSHA256": "ef508e05f5df9b1d6611d88b7224663fedcf2eff6632b890d19e39bde9a6e27b",
+  "systemPromptSHA256": "de83d57528a805a093db15332c38b73559c74ffed32db21e5d03bda1fc6d9862",
+  "adapterSHA256": "ef508e05f5df9b1d6611d88b7224663fedcf2eff6632b890d19e39bde9a6e27b",
+  "validatorSHA256": "b660d364cfb5907bb5fd62ce46bde0d6c313b36f79e0e1179fec0348ca4604c3",
+  "schemaContractFileSHA256": "e87ce718cf03d5770def348169c9236a9bd62349a0bf64ceb35463852fec70e9",
+  "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+  "request": {
+    "temperature": 0,
+    "max_tokens": 1800,
+    "chat_template_kwargs": {
+      "enable_thinking": false
+    },
+    "response_format": "omitted"
+  },
+  "retries": 0,
+  "startedUTC": "2026-10-28T20:48:01Z",
+  "finishedUTC": "2026-10-28T20:48:22Z",
+  "actualNewLedgerAttempts": 12,
+  "allUsageSettled": true,
+  "newTokenCostUSD": 0.00102468,
+  "aggregateRequests": 34,
+  "aggregateTokenCostUSD": 0.00730644,
+  "attemptsSHA256": "2e5f81527d9a948b20f9bb7c6f4e968141a943f017e35c6466f890784c40de9a",
+  "structuredResultsReturned": 5,
+  "rejectedRecords": 7,
+  "rejectionClasses": {
+    "validation": 7
+  },
+  "goldAccessed": false,
+  "costBasis": "Provider token usage times verified public rates; not a tax-inclusive invoice",
+  "parameterCompatibilityObservation": "All12 requests sent the frozen enable_thinking=false field and returned metered model envelopes; no unsupported-parameter response. This does not independently attest server-internal reasoning behavior.",
+  "note": "Sanitized publication manifest; operational account, private transport and ledger identifiers excluded. Attempts and synthetic inputs unchanged."
+}

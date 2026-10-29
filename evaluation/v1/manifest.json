@@ -1,0 +1,29 @@
+{
+  "buildId": "FS-1.3-b1ac9f03b23c",
+  "inputSHA256": "69d4b2c9079e9b02f722e9a49b9bdb8e23f6900e0b700c49eaa88b45627e0972",
+  "inputCases": 18,
+  "providerSHA256": "4383bf8f7b9f41e648148f7aa4b1ca5fa7b577f36c406779a1c2d0397018ca7d",
+  "systemPromptSHA256": "09793b16ccb9d4ae43b47900e151837e33665c672b0dee5980bb2a75e2293873",
+  "schemaContractFileSHA256": "fb0d5db0eb1e61f18b24687e9a6643fa9bdcae711cc90f6561aa1036e311e5a1",
+  "model": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+  "temperature": 0,
+  "max_tokens": 1800,
+  "retries": 0,
+  "startedUTC": "2026-10-28T20:15:08Z",
+  "finishedUTC": "2026-10-28T20:16:40Z",
+  "actualNewLedgerAttempts": 18,
+  "attemptsCompleted": 18,
+  "allRunUsageSettled": true,
+  "newTokenCostUSD": "0.00493746",
+  "aggregateRequests": 22,
+  "aggregateTokenCostUSD": "0.00628176",
+  "attemptsSHA256": "d6b72e8cd0fe8343e09d6dc2ebd6d1b2e21c7d092cd2ec3e97a7815fbda48e69",
+  "structuredResultsReturned": 14,
+  "rejectedBeforeScoring": 4,
+  "rejectionClasses": {
+    "truncated": 3,
+    "validation": 1
+  },
+  "goldAccessed": false,
+  "note": "Sanitized publication manifest; operational account, private transport and ledger identifiers excluded. Attempts and synthetic inputs unchanged."
+}

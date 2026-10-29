@@ -1,0 +1,18 @@
+{
+  "completeCases": {
+    "passed": 4,
+    "total": 12
+  },
+  "completeObservations": {
+    "passed": 6,
+    "total": 18
+  },
+  "fixedBaselineCases": {
+    "passed": 10,
+    "total": 12
+  },
+  "fixedBaselineObservations": {
+    "passed": 16,
+    "total": 18
+  }
+}
