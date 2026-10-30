@@ -1,5 +1,7 @@
 # FreightSwitch — public recorded-output browser preview
 
+Created by **Ziyou Cheng**.
+
 **Public demo:** <https://freightswitch-review-preview.quailsemp.chatgpt.site>
 
 This directory contains the complete static application served by the public demo, its source generator, captured authored fixture outputs and adapter tests. It is MIT-licensed under the repository's [LICENSE](../LICENSE). It is **not** the Python/SQLite application and does not claim to be its complete JavaScript equivalent.

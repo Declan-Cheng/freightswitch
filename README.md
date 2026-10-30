@@ -1,5 +1,7 @@
 # FreightSwitch — source-bound human review
 
+Created by **Ziyou Cheng**.
+
 A synthetic shipment-change confirmation workbench: keep the old agreement visible, inspect a proposed address/time, distinguish receipt from acceptance, and trace withdrawal and explicit reconfirmation to exact source messages.
 
 **Prototype, not shipment authorization.** No carrier connection, dispatch action, verified real-world identity or physical-delivery claim. The three-party agreement display uses authored fixtures. Separate human assessments never change that agreement. Optional model suggestions are fallible and remain UNVERIFIED even after a separate bounded local interpretation is recorded; that interpretation is not authenticated counterparty acceptance.
