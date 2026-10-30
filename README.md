@@ -4,6 +4,14 @@ A synthetic shipment-change confirmation workbench: keep the old agreement visib
 
 **Prototype, not shipment authorization.** No carrier connection, dispatch action, verified real-world identity or physical-delivery claim. The three-party agreement display uses authored fixtures. Separate human assessments never change that agreement. Optional model suggestions are fallible and remain UNVERIFIED even after a separate bounded local interpretation is recorded; that interpretation is not authenticated counterparty acceptance.
 
+## Public browser demo
+
+**[Open the public interactive demo](https://freightswitch-review-preview.quailsemp.chatgpt.site)** — no login or API key required.
+
+The hosted demo is a **browser-local recorded-output preview**, not the Python/SQLite server and not live inference. It replays authored shipment-state outputs and supports bounded local human interpretations using scripted synthetic examples. Review history stays in that browser's local storage, survives reload there, and can be changed or deleted by its owner; it is not a shared or tamper-proof audit. Counterparty identity is not authenticated, and no human interpretation changes a shipment agreement or dispatches anything.
+
+The complete deployed implementation, all nine exact static assets, source generator, captured synthetic outputs and adapter tests are included in [`preview/`](preview/README.md). Preview identity is `FS-BROWSER-PREVIEW-88f736ed8f28`; the reference core remains `FS-1.6-public-22bb8d9b977b`. The adapter passed **86 checks**, including **43 differential request cases**. Earlier actual internal-preview browser QA reported **23 UI checks**; a separate anonymous public v6 interpretation/reload/export smoke test also passed. These are engineering checks, not model-accuracy results, and CSS viewport tests are not native mobile-device tests. The Python application's **201 tests and six authored scenes** remain separate.
+
 ## Run the complete local test build
 
 Python 3.9+ standard library; no dependency installation, account or API key is needed for the offline app.
@@ -59,7 +67,7 @@ The public human-review panel uses newly authored mocks only; the private post-h
 
 ## Release and competition status
 
-Public source repository: <https://github.com/Declan-Cheng/freightswitch>. This tree provides a complete local test build. A judge-accessible hosted demo, a public video and formal competition submission are separate deliverables; their completion is not established by this source tree.
+Public source repository: <https://github.com/Declan-Cheng/freightswitch>. This tree provides the complete local Python test build and complete source of the [public browser demo](https://freightswitch-review-preview.quailsemp.chatgpt.site). Anonymous access and the bounded public workflow were verified. Public YouTube video URL: **pending**. Formal competition submission is tracked separately; neither a live demo nor this source tree establishes submission acceptance.
 
 The intended competition track is **Best Apps and Agents**, using Nemotron through Nebius Token Factory. The [official rules](https://nebiusglobalaihackathon.devpost.com/rules) require a working demo/application/test-build URL, public open-source repository and a public YouTube demonstration under three minutes. Judging access must remain available through **December 23, 2026, 20:00 UTC** (12:00 Pacific Standard Time), not December 15. The entry deadline is October 30, 2026, 17:00 UTC. These requirements do not establish eligibility, submission acceptance or any prize outcome.
 

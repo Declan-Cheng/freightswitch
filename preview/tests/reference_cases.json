@@ -1,0 +1,838 @@
+[
+  {
+    "name": "human accept valid",
+    "patch": {},
+    "remove": [],
+    "assessment": true,
+    "fixture": "practice",
+    "expected": {
+      "ok": true,
+      "entry": {
+        "sourceId": "authored_accept_practice",
+        "sourceSHA256": "f2cd53370470b4b9f05e4bc24f90aebf137f9fdeff3a8e9b694fd993e5279268",
+        "version": "v6",
+        "quote": "Sent 2026-10-29T12:00:00+00:00. Customer: I accept v6 with no remaining conditions.",
+        "kind": "accept",
+        "modelKind": "accept",
+        "decision": "human_assessment",
+        "note": "I reviewed the complete source v6 and its unconditional wording.",
+        "scope": "human-assessment-only",
+        "agreementChanged": false,
+        "semanticVerified": false,
+        "modelUnverified": true,
+        "synthetic": true,
+        "sourceIdentityVerified": false,
+        "humanKind": "accept",
+        "humanReported": true,
+        "reviewerIdentityVerified": false,
+        "acceptanceAuthority": "none",
+        "conditionsQuotesChecked": true,
+        "localInterpretationOnlyAcknowledged": true,
+        "sourceReviewed": true,
+        "interpretationAuthority": "local-reviewer-only",
+        "noAuthenticatedCounterpartyAgreement": true
+      }
+    }
+  },
+  {
+    "name": "approve accept blocked",
+    "patch": {
+      "decision": "approve"
+    },
+    "remove": [
+      "humanKind",
+      "sourceReviewed",
+      "conditionsQuotesChecked",
+      "localInterpretationOnlyAcknowledged"
+    ],
+    "assessment": false,
+    "fixture": "practice",
+    "expected": {
+      "ok": false
+    }
+  },
+  {
+    "name": "separate human propose",
+    "patch": {
+      "humanKind": "propose"
+    },
+    "remove": [
+      "sourceReviewed",
+      "conditionsQuotesChecked",
+      "localInterpretationOnlyAcknowledged"
+    ],
+    "assessment": true,
+    "fixture": "practice",
+    "expected": {
+      "ok": true,
+      "entry": {
+        "sourceId": "authored_accept_practice",
+        "sourceSHA256": "f2cd53370470b4b9f05e4bc24f90aebf137f9fdeff3a8e9b694fd993e5279268",
+        "version": "v6",
+        "quote": "Sent 2026-10-29T12:00:00+00:00. Customer: I accept v6 with no remaining conditions.",
+        "kind": "accept",
+        "modelKind": "accept",
+        "decision": "human_assessment",
+        "note": "I reviewed the complete source v6 and its unconditional wording.",
+        "scope": "human-assessment-only",
+        "agreementChanged": false,
+        "semanticVerified": false,
+        "modelUnverified": true,
+        "synthetic": true,
+        "sourceIdentityVerified": false,
+        "humanKind": "propose",
+        "humanReported": true,
+        "reviewerIdentityVerified": false,
+        "acceptanceAuthority": "none"
+      }
+    }
+  },
+  {
+    "name": "separate human received",
+    "patch": {
+      "humanKind": "received"
+    },
+    "remove": [
+      "sourceReviewed",
+      "conditionsQuotesChecked",
+      "localInterpretationOnlyAcknowledged"
+    ],
+    "assessment": true,
+    "fixture": "practice",
+    "expected": {
+      "ok": true,
+      "entry": {
+        "sourceId": "authored_accept_practice",
+        "sourceSHA256": "f2cd53370470b4b9f05e4bc24f90aebf137f9fdeff3a8e9b694fd993e5279268",
+        "version": "v6",
+        "quote": "Sent 2026-10-29T12:00:00+00:00. Customer: I accept v6 with no remaining conditions.",
+        "kind": "accept",
+        "modelKind": "accept",
+        "decision": "human_assessment",
+        "note": "I reviewed the complete source v6 and its unconditional wording.",
+        "scope": "human-assessment-only",
+        "agreementChanged": false,
+        "semanticVerified": false,
+        "modelUnverified": true,
+        "synthetic": true,
+        "sourceIdentityVerified": false,
+        "humanKind": "received",
+        "humanReported": true,
+        "reviewerIdentityVerified": false,
+        "acceptanceAuthority": "none"
+      }
+    }
+  },
+  {
+    "name": "separate human reject",
+    "patch": {
+      "humanKind": "reject"
+    },
+    "remove": [
+      "sourceReviewed",
+      "conditionsQuotesChecked",
+      "localInterpretationOnlyAcknowledged"
+    ],
+    "assessment": true,
+    "fixture": "practice",
+    "expected": {
+      "ok": true,
+      "entry": {
+        "sourceId": "authored_accept_practice",
+        "sourceSHA256": "f2cd53370470b4b9f05e4bc24f90aebf137f9fdeff3a8e9b694fd993e5279268",
+        "version": "v6",
+        "quote": "Sent 2026-10-29T12:00:00+00:00. Customer: I accept v6 with no remaining conditions.",
+        "kind": "accept",
+        "modelKind": "accept",
+        "decision": "human_assessment",
+        "note": "I reviewed the complete source v6 and its unconditional wording.",
+        "scope": "human-assessment-only",
+        "agreementChanged": false,
+        "semanticVerified": false,
+        "modelUnverified": true,
+        "synthetic": true,
+        "sourceIdentityVerified": false,
+        "humanKind": "reject",
+        "humanReported": true,
+        "reviewerIdentityVerified": false,
+        "acceptanceAuthority": "none"
+      }
+    }
+  },
+  {
+    "name": "separate human withdraw",
+    "patch": {
+      "humanKind": "withdraw"
+    },
+    "remove": [
+      "sourceReviewed",
+      "conditionsQuotesChecked",
+      "localInterpretationOnlyAcknowledged"
+    ],
+    "assessment": true,
+    "fixture": "practice",
+    "expected": {
+      "ok": true,
+      "entry": {
+        "sourceId": "authored_accept_practice",
+        "sourceSHA256": "f2cd53370470b4b9f05e4bc24f90aebf137f9fdeff3a8e9b694fd993e5279268",
+        "version": "v6",
+        "quote": "Sent 2026-10-29T12:00:00+00:00. Customer: I accept v6 with no remaining conditions.",
+        "kind": "accept",
+        "modelKind": "accept",
+        "decision": "human_assessment",
+        "note": "I reviewed the complete source v6 and its unconditional wording.",
+        "scope": "human-assessment-only",
+        "agreementChanged": false,
+        "semanticVerified": false,
+        "modelUnverified": true,
+        "synthetic": true,
+        "sourceIdentityVerified": false,
+        "humanKind": "withdraw",
+        "humanReported": true,
+        "reviewerIdentityVerified": false,
+        "acceptanceAuthority": "none"
+      }
+    }
+  },
+  {
+    "name": "separate human unclear",
+    "patch": {
+      "humanKind": "unclear"
+    },
+    "remove": [
+      "sourceReviewed",
+      "conditionsQuotesChecked",
+      "localInterpretationOnlyAcknowledged"
+    ],
+    "assessment": true,
+    "fixture": "practice",
+    "expected": {
+      "ok": true,
+      "entry": {
+        "sourceId": "authored_accept_practice",
+        "sourceSHA256": "f2cd53370470b4b9f05e4bc24f90aebf137f9fdeff3a8e9b694fd993e5279268",
+        "version": "v6",
+        "quote": "Sent 2026-10-29T12:00:00+00:00. Customer: I accept v6 with no remaining conditions.",
+        "kind": "accept",
+        "modelKind": "accept",
+        "decision": "human_assessment",
+        "note": "I reviewed the complete source v6 and its unconditional wording.",
+        "scope": "human-assessment-only",
+        "agreementChanged": false,
+        "semanticVerified": false,
+        "modelUnverified": true,
+        "synthetic": true,
+        "sourceIdentityVerified": false,
+        "humanKind": "unclear",
+        "humanReported": true,
+        "reviewerIdentityVerified": false,
+        "acceptanceAuthority": "none"
+      }
+    }
+  },
+  {
+    "name": "sourceReviewed rejects False",
+    "patch": {
+      "sourceReviewed": false
+    },
+    "remove": [],
+    "assessment": true,
+    "fixture": "practice",
+    "expected": {
+      "ok": false
+    }
+  },
+  {
+    "name": "sourceReviewed rejects 1",
+    "patch": {
+      "sourceReviewed": 1
+    },
+    "remove": [],
+    "assessment": true,
+    "fixture": "practice",
+    "expected": {
+      "ok": false
+    }
+  },
+  {
+    "name": "sourceReviewed rejects true",
+    "patch": {
+      "sourceReviewed": "true"
+    },
+    "remove": [],
+    "assessment": true,
+    "fixture": "practice",
+    "expected": {
+      "ok": false
+    }
+  },
+  {
+    "name": "sourceReviewed rejects None",
+    "patch": {
+      "sourceReviewed": null
+    },
+    "remove": [],
+    "assessment": true,
+    "fixture": "practice",
+    "expected": {
+      "ok": false
+    }
+  },
+  {
+    "name": "sourceReviewed missing",
+    "patch": {},
+    "remove": [
+      "sourceReviewed"
+    ],
+    "assessment": true,
+    "fixture": "practice",
+    "expected": {
+      "ok": false
+    }
+  },
+  {
+    "name": "conditionsQuotesChecked rejects False",
+    "patch": {
+      "conditionsQuotesChecked": false
+    },
+    "remove": [],
+    "assessment": true,
+    "fixture": "practice",
+    "expected": {
+      "ok": false
+    }
+  },
+  {
+    "name": "conditionsQuotesChecked rejects 1",
+    "patch": {
+      "conditionsQuotesChecked": 1
+    },
+    "remove": [],
+    "assessment": true,
+    "fixture": "practice",
+    "expected": {
+      "ok": false
+    }
+  },
+  {
+    "name": "conditionsQuotesChecked rejects true",
+    "patch": {
+      "conditionsQuotesChecked": "true"
+    },
+    "remove": [],
+    "assessment": true,
+    "fixture": "practice",
+    "expected": {
+      "ok": false
+    }
+  },
+  {
+    "name": "conditionsQuotesChecked rejects None",
+    "patch": {
+      "conditionsQuotesChecked": null
+    },
+    "remove": [],
+    "assessment": true,
+    "fixture": "practice",
+    "expected": {
+      "ok": false
+    }
+  },
+  {
+    "name": "conditionsQuotesChecked missing",
+    "patch": {},
+    "remove": [
+      "conditionsQuotesChecked"
+    ],
+    "assessment": true,
+    "fixture": "practice",
+    "expected": {
+      "ok": false
+    }
+  },
+  {
+    "name": "localInterpretationOnlyAcknowledged rejects False",
+    "patch": {
+      "localInterpretationOnlyAcknowledged": false
+    },
+    "remove": [],
+    "assessment": true,
+    "fixture": "practice",
+    "expected": {
+      "ok": false
+    }
+  },
+  {
+    "name": "localInterpretationOnlyAcknowledged rejects 1",
+    "patch": {
+      "localInterpretationOnlyAcknowledged": 1
+    },
+    "remove": [],
+    "assessment": true,
+    "fixture": "practice",
+    "expected": {
+      "ok": false
+    }
+  },
+  {
+    "name": "localInterpretationOnlyAcknowledged rejects true",
+    "patch": {
+      "localInterpretationOnlyAcknowledged": "true"
+    },
+    "remove": [],
+    "assessment": true,
+    "fixture": "practice",
+    "expected": {
+      "ok": false
+    }
+  },
+  {
+    "name": "localInterpretationOnlyAcknowledged rejects None",
+    "patch": {
+      "localInterpretationOnlyAcknowledged": null
+    },
+    "remove": [],
+    "assessment": true,
+    "fixture": "practice",
+    "expected": {
+      "ok": false
+    }
+  },
+  {
+    "name": "localInterpretationOnlyAcknowledged missing",
+    "patch": {},
+    "remove": [
+      "localInterpretationOnlyAcknowledged"
+    ],
+    "assessment": true,
+    "fixture": "practice",
+    "expected": {
+      "ok": false
+    }
+  },
+  {
+    "name": "note 0",
+    "patch": {
+      "note": ""
+    },
+    "remove": [],
+    "assessment": true,
+    "fixture": "practice",
+    "expected": {
+      "ok": false
+    }
+  },
+  {
+    "name": "note 1",
+    "patch": {
+      "note": " "
+    },
+    "remove": [],
+    "assessment": true,
+    "fixture": "practice",
+    "expected": {
+      "ok": false
+    }
+  },
+  {
+    "name": "note 11",
+    "patch": {
+      "note": "12345678901"
+    },
+    "remove": [],
+    "assessment": true,
+    "fixture": "practice",
+    "expected": {
+      "ok": false
+    }
+  },
+  {
+    "name": "note 1001",
+    "patch": {
+      "note": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "remove": [],
+    "assessment": true,
+    "fixture": "practice",
+    "expected": {
+      "ok": false
+    }
+  },
+  {
+    "name": "note 11",
+    "patch": {
+      "note": "\ud83d\ude42\ud83d\ude42\ud83d\ude42\ud83d\ude42\ud83d\ude42\ud83d\ude42\ud83d\ude42\ud83d\ude42\ud83d\ude42\ud83d\ude42\ud83d\ude42"
+    },
+    "remove": [],
+    "assessment": true,
+    "fixture": "practice",
+    "expected": {
+      "ok": false
+    }
+  },
+  {
+    "name": "note 12",
+    "patch": {
+      "note": "\ud83d\ude42\ud83d\ude42\ud83d\ude42\ud83d\ude42\ud83d\ude42\ud83d\ude42\ud83d\ude42\ud83d\ude42\ud83d\ude42\ud83d\ude42\ud83d\ude42\ud83d\ude42"
+    },
+    "remove": [],
+    "assessment": true,
+    "fixture": "practice",
+    "expected": {
+      "ok": true,
+      "entry": {
+        "sourceId": "authored_accept_practice",
+        "sourceSHA256": "f2cd53370470b4b9f05e4bc24f90aebf137f9fdeff3a8e9b694fd993e5279268",
+        "version": "v6",
+        "quote": "Sent 2026-10-29T12:00:00+00:00. Customer: I accept v6 with no remaining conditions.",
+        "kind": "accept",
+        "modelKind": "accept",
+        "decision": "human_assessment",
+        "note": "\ud83d\ude42\ud83d\ude42\ud83d\ude42\ud83d\ude42\ud83d\ude42\ud83d\ude42\ud83d\ude42\ud83d\ude42\ud83d\ude42\ud83d\ude42\ud83d\ude42\ud83d\ude42",
+        "scope": "human-assessment-only",
+        "agreementChanged": false,
+        "semanticVerified": false,
+        "modelUnverified": true,
+        "synthetic": true,
+        "sourceIdentityVerified": false,
+        "humanKind": "accept",
+        "humanReported": true,
+        "reviewerIdentityVerified": false,
+        "acceptanceAuthority": "none",
+        "conditionsQuotesChecked": true,
+        "localInterpretationOnlyAcknowledged": true,
+        "sourceReviewed": true,
+        "interpretationAuthority": "local-reviewer-only",
+        "noAuthenticatedCounterpartyAgreement": true
+      }
+    }
+  },
+  {
+    "name": "note 28",
+    "patch": {
+      "note": "source v6 reviewed carefully"
+    },
+    "remove": [],
+    "assessment": true,
+    "fixture": "practice",
+    "expected": {
+      "ok": true,
+      "entry": {
+        "sourceId": "authored_accept_practice",
+        "sourceSHA256": "f2cd53370470b4b9f05e4bc24f90aebf137f9fdeff3a8e9b694fd993e5279268",
+        "version": "v6",
+        "quote": "Sent 2026-10-29T12:00:00+00:00. Customer: I accept v6 with no remaining conditions.",
+        "kind": "accept",
+        "modelKind": "accept",
+        "decision": "human_assessment",
+        "note": "source v6 reviewed carefully",
+        "scope": "human-assessment-only",
+        "agreementChanged": false,
+        "semanticVerified": false,
+        "modelUnverified": true,
+        "synthetic": true,
+        "sourceIdentityVerified": false,
+        "humanKind": "accept",
+        "humanReported": true,
+        "reviewerIdentityVerified": false,
+        "acceptanceAuthority": "none",
+        "conditionsQuotesChecked": true,
+        "localInterpretationOnlyAcknowledged": true,
+        "sourceReviewed": true,
+        "interpretationAuthority": "local-reviewer-only",
+        "noAuthenticatedCounterpartyAgreement": true
+      }
+    }
+  },
+  {
+    "name": "bad version",
+    "patch": {
+      "version": "v7"
+    },
+    "remove": [],
+    "assessment": true,
+    "fixture": "practice",
+    "expected": {
+      "ok": false
+    }
+  },
+  {
+    "name": "bad quote",
+    "patch": {
+      "quote": "partial quote"
+    },
+    "remove": [],
+    "assessment": true,
+    "fixture": "practice",
+    "expected": {
+      "ok": false
+    }
+  },
+  {
+    "name": "bad sourceSHA256",
+    "patch": {
+      "sourceSHA256": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    "remove": [],
+    "assessment": true,
+    "fixture": "practice",
+    "expected": {
+      "ok": false
+    }
+  },
+  {
+    "name": "bad sourceRevision",
+    "patch": {
+      "sourceRevision": "stale"
+    },
+    "remove": [],
+    "assessment": true,
+    "fixture": "practice",
+    "expected": {
+      "ok": false
+    }
+  },
+  {
+    "name": "bad actionId",
+    "patch": {
+      "actionId": ""
+    },
+    "remove": [],
+    "assessment": true,
+    "fixture": "practice",
+    "expected": {
+      "ok": false
+    }
+  },
+  {
+    "name": "bad actionId",
+    "patch": {
+      "actionId": "bad action"
+    },
+    "remove": [],
+    "assessment": true,
+    "fixture": "practice",
+    "expected": {
+      "ok": false
+    }
+  },
+  {
+    "name": "bad humanKind",
+    "patch": {
+      "humanKind": "automatic"
+    },
+    "remove": [],
+    "assessment": true,
+    "fixture": "practice",
+    "expected": {
+      "ok": false
+    }
+  },
+  {
+    "name": "bad extra",
+    "patch": {
+      "extra": true
+    },
+    "remove": [],
+    "assessment": true,
+    "fixture": "practice",
+    "expected": {
+      "ok": false
+    }
+  },
+  {
+    "name": "safe action key __proto__",
+    "patch": {
+      "actionId": "__proto__"
+    },
+    "remove": [],
+    "assessment": true,
+    "fixture": "practice",
+    "expected": {
+      "ok": true,
+      "entry": {
+        "sourceId": "authored_accept_practice",
+        "sourceSHA256": "f2cd53370470b4b9f05e4bc24f90aebf137f9fdeff3a8e9b694fd993e5279268",
+        "version": "v6",
+        "quote": "Sent 2026-10-29T12:00:00+00:00. Customer: I accept v6 with no remaining conditions.",
+        "kind": "accept",
+        "modelKind": "accept",
+        "decision": "human_assessment",
+        "note": "I reviewed the complete source v6 and its unconditional wording.",
+        "scope": "human-assessment-only",
+        "agreementChanged": false,
+        "semanticVerified": false,
+        "modelUnverified": true,
+        "synthetic": true,
+        "sourceIdentityVerified": false,
+        "humanKind": "accept",
+        "humanReported": true,
+        "reviewerIdentityVerified": false,
+        "acceptanceAuthority": "none",
+        "conditionsQuotesChecked": true,
+        "localInterpretationOnlyAcknowledged": true,
+        "sourceReviewed": true,
+        "interpretationAuthority": "local-reviewer-only",
+        "noAuthenticatedCounterpartyAgreement": true
+      }
+    }
+  },
+  {
+    "name": "safe action key constructor",
+    "patch": {
+      "actionId": "constructor"
+    },
+    "remove": [],
+    "assessment": true,
+    "fixture": "practice",
+    "expected": {
+      "ok": true,
+      "entry": {
+        "sourceId": "authored_accept_practice",
+        "sourceSHA256": "f2cd53370470b4b9f05e4bc24f90aebf137f9fdeff3a8e9b694fd993e5279268",
+        "version": "v6",
+        "quote": "Sent 2026-10-29T12:00:00+00:00. Customer: I accept v6 with no remaining conditions.",
+        "kind": "accept",
+        "modelKind": "accept",
+        "decision": "human_assessment",
+        "note": "I reviewed the complete source v6 and its unconditional wording.",
+        "scope": "human-assessment-only",
+        "agreementChanged": false,
+        "semanticVerified": false,
+        "modelUnverified": true,
+        "synthetic": true,
+        "sourceIdentityVerified": false,
+        "humanKind": "accept",
+        "humanReported": true,
+        "reviewerIdentityVerified": false,
+        "acceptanceAuthority": "none",
+        "conditionsQuotesChecked": true,
+        "localInterpretationOnlyAcknowledged": true,
+        "sourceReviewed": true,
+        "interpretationAuthority": "local-reviewer-only",
+        "noAuthenticatedCounterpartyAgreement": true
+      }
+    }
+  },
+  {
+    "name": "safe action key valid-action-1",
+    "patch": {
+      "actionId": "valid-action-1"
+    },
+    "remove": [],
+    "assessment": true,
+    "fixture": "practice",
+    "expected": {
+      "ok": true,
+      "entry": {
+        "sourceId": "authored_accept_practice",
+        "sourceSHA256": "f2cd53370470b4b9f05e4bc24f90aebf137f9fdeff3a8e9b694fd993e5279268",
+        "version": "v6",
+        "quote": "Sent 2026-10-29T12:00:00+00:00. Customer: I accept v6 with no remaining conditions.",
+        "kind": "accept",
+        "modelKind": "accept",
+        "decision": "human_assessment",
+        "note": "I reviewed the complete source v6 and its unconditional wording.",
+        "scope": "human-assessment-only",
+        "agreementChanged": false,
+        "semanticVerified": false,
+        "modelUnverified": true,
+        "synthetic": true,
+        "sourceIdentityVerified": false,
+        "humanKind": "accept",
+        "humanReported": true,
+        "reviewerIdentityVerified": false,
+        "acceptanceAuthority": "none",
+        "conditionsQuotesChecked": true,
+        "localInterpretationOnlyAcknowledged": true,
+        "sourceReviewed": true,
+        "interpretationAuthority": "local-reviewer-only",
+        "noAuthenticatedCounterpartyAgreement": true
+      }
+    }
+  },
+  {
+    "name": "example decision reject",
+    "patch": {
+      "decision": "reject"
+    },
+    "remove": [
+      "humanKind",
+      "sourceReviewed",
+      "conditionsQuotesChecked",
+      "localInterpretationOnlyAcknowledged"
+    ],
+    "assessment": false,
+    "fixture": "example",
+    "expected": {
+      "ok": true,
+      "entry": {
+        "sourceId": "authored_review_example",
+        "sourceSHA256": "346cd7ddce564680dbd1c2b1c046e0c083c48929d86c784bd60db7e1aec24bcb",
+        "version": "v42",
+        "quote": "Fictional desk note: the revised route v42 is a definite no from this desk.",
+        "kind": "reject",
+        "modelKind": "reject",
+        "decision": "reject",
+        "note": "I reviewed the complete source v6 and its unconditional wording.",
+        "scope": "interpretation-only",
+        "agreementChanged": false,
+        "semanticVerified": false,
+        "modelUnverified": true,
+        "synthetic": true,
+        "sourceIdentityVerified": false
+      }
+    }
+  },
+  {
+    "name": "example decision needs_clarification",
+    "patch": {
+      "decision": "needs_clarification"
+    },
+    "remove": [
+      "humanKind",
+      "sourceReviewed",
+      "conditionsQuotesChecked",
+      "localInterpretationOnlyAcknowledged"
+    ],
+    "assessment": false,
+    "fixture": "example",
+    "expected": {
+      "ok": true,
+      "entry": {
+        "sourceId": "authored_review_example",
+        "sourceSHA256": "346cd7ddce564680dbd1c2b1c046e0c083c48929d86c784bd60db7e1aec24bcb",
+        "version": "v42",
+        "quote": "Fictional desk note: the revised route v42 is a definite no from this desk.",
+        "kind": "reject",
+        "modelKind": "reject",
+        "decision": "needs_clarification",
+        "note": "I reviewed the complete source v6 and its unconditional wording.",
+        "scope": "interpretation-only",
+        "agreementChanged": false,
+        "semanticVerified": false,
+        "modelUnverified": true,
+        "synthetic": true,
+        "sourceIdentityVerified": false
+      }
+    }
+  },
+  {
+    "name": "example decision approve",
+    "patch": {
+      "decision": "approve"
+    },
+    "remove": [
+      "humanKind",
+      "sourceReviewed",
+      "conditionsQuotesChecked",
+      "localInterpretationOnlyAcknowledged"
+    ],
+    "assessment": false,
+    "fixture": "example",
+    "expected": {
+      "ok": false
+    }
+  }
+]

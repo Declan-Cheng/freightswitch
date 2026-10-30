@@ -1,0 +1,65 @@
+{
+  "checkedUTC": "2026-10-30T13:57:45.576746+00:00",
+  "reference": {
+    "buildId": "FS-1.6-public-22bb8d9b977b",
+    "sourceDigest": "22bb8d9b977bc99dbbcf08d925bcaf2c3d63830ab4236f99ea81f578d3e7c902"
+  },
+  "preview": {
+    "buildId": "FS-BROWSER-PREVIEW-88f736ed8f28",
+    "sourceDigest": "88f736ed8f280858edd31d42ab8f2476733a5d98f3f7d53db0e985ec9d2dceaa",
+    "digestContract": "Sorted deployed files except demo-data.js plus canonical capture JSON excluding preview metadata."
+  },
+  "coreDevelopmentTests": {
+    "run": 201,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "authoredScenarios": {
+    "passed": 6,
+    "total": 6,
+    "modelQuality": null
+  },
+  "adapterChecks": {
+    "passed": 86,
+    "pythonDifferentialCases": 43,
+    "freshReferenceOutcomeComparison": "all 43 semantically equal; JSON dictionary ordering can differ",
+    "browserVisualQA": "not performed by Node suite"
+  },
+  "scratchRegeneration": {
+    "passed": true,
+    "allAuthoredOutputsSemanticallyMatch": true,
+    "ignoredFields": [
+      "createdAt",
+      "proposalId",
+      "revisionId",
+      "savedAt",
+      "sourceRevision"
+    ],
+    "previewIdentityMetadataExcluded": true,
+    "newInferenceCalls": 0,
+    "originalSnapshotPreserved": true
+  },
+  "anonymousPublishedAssets": {
+    "passed": true,
+    "assetCount": 9,
+    "hashesMatchManifest": true,
+    "noAuthentication": true,
+    "url": "https://freightswitch-review-preview.quailsemp.chatgpt.site"
+  },
+  "priorReportedBrowserQA": {
+    "internalPreviewUIChecks": 23,
+    "viewportFramesCSSPixels": [
+      320,
+      390,
+      1280
+    ],
+    "nativeMobileDeviceTesting": false,
+    "realExportDownloads": true,
+    "publicAnonymousWorkflowSmoke": "authored v6 human interpretation, reload persistence and export passed; reported by separate browser QA",
+    "notRerunByAdapterSuite": true
+  },
+  "newInferenceCalls": 0,
+  "freshModelAccuracyScore": null,
+  "notice": "Engineering and bounded workflow checks only; not model accuracy, operational authority or competition submission acceptance."
+}

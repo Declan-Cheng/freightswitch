@@ -1,0 +1,26 @@
+{
+  "reference": {
+    "buildId": "FS-1.6-public-22bb8d9b977b",
+    "sourceDigest": "22bb8d9b977bc99dbbcf08d925bcaf2c3d63830ab4236f99ea81f578d3e7c902"
+  },
+  "preview": {
+    "buildId": "FS-BROWSER-PREVIEW-88f736ed8f28",
+    "sourceDigest": "88f736ed8f280858edd31d42ab8f2476733a5d98f3f7d53db0e985ec9d2dceaa",
+    "digestContract": "Sorted deployed files except demo-data.js plus canonical capture JSON excluding preview metadata."
+  },
+  "artifacts": {
+    "advisory.js": "c9f6efee42ade220fca9083ddb56520b94e25c8cb0766dc8a1d96cef44279880",
+    "app.js": "aabb535635a628a5a09dced2a90bec21bf49bff62f0c10845e2e43aca71b2f63",
+    "demo-api.js": "f70231d28f2984d185a2a999e25dffe5c4c848a528084a277e9ec928cf96be90",
+    "demo-data.js": "0b72d3876f4318542f7a81fe3d1786ca65ced9f537981d8fa9b757b485419344",
+    "demo-ui.js": "a8b3c193ae03a074d1c8df682630b2d84bab40ad7b9d792aadfc7f78e4501ac5",
+    "demo.css": "4bffd37f7fac840dc376f3ac895ba2b1416353b3b3a16dbd95e81780e7f53622",
+    "index.html": "6e0b2ddb9b502c2013c68eb9ef40a24ab98710270be824fa61bd9b77b47def8b",
+    "responsive-qa.html": "45805456cfb6dd9a33556b9d7b8d1913d031ecac21f0b0f6293e17effc593a33",
+    "style.css": "b6dd91c748140f160fa66d79fba3a75143c3a36697b3b45b2be5fb540134089e"
+  },
+  "noNewInference": true,
+  "recordedModelsIncluded": false,
+  "storage": "browser-local",
+  "runtimeDifference": "Not Python/SQLite; agreement output captured, source-bound human review uses separately tested browser adapter."
+}
