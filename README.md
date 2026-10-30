@@ -1,56 +1,66 @@
-# FreightSwitch
+# FreightSwitch — source-bound human review
 
-A synthetic shipment-change confirmation and stale-version workbench. One shipment, three fictional parties: preserve the old agreement, inspect the proposed address/time, distinguish receipt from acceptance, and follow revocation and explicit reconfirmation back to exact source messages.
+A synthetic shipment-change confirmation workbench: keep the old agreement visible, inspect a proposed address/time, distinguish receipt from acceptance, and trace withdrawal and explicit reconfirmation to exact source messages.
 
-**Prototype, not shipment authorization.** No carrier connection, dispatch action, verified real-world identity or physical-delivery claim. Model suggestions are optional and fallible. The default UI is offline and has no live-inference web route.
+**Prototype, not shipment authorization.** No carrier connection, dispatch action, verified real-world identity or physical-delivery claim. The three-party agreement display uses authored fixtures. Separate human assessments never change that agreement. Optional model suggestions are fallible and remain UNVERIFIED even after a separate bounded local interpretation is recorded; that interpretation is not authenticated counterparty acceptance.
 
-## Run
+## Run the complete local test build
 
-Python 3.9+ standard library; no dependency installation needed.
+Python 3.9+ standard library; no dependency installation, account or API key is needed for the offline app.
 
 ```sh
 python3 server.py --port 8909
 ```
 
-Open http://127.0.0.1:8909/. The source build identifier is `FS-1.4.1-b479055da0ae`; it is a source digest, not process attestation. Use fictional messages only. Review history is stored locally in `.runtime/` and excluded from version control. Approving an interpretation does not change the deterministic shipment agreement.
+Open <http://127.0.0.1:8909/>. `/api/health` returns `FS-1.6-public-<source digest>` and the complete source digest. This digest identifies source files, not process attestation. Use fictional messages only. Local review history is stored in `.runtime/`, which is excluded from version control. The server intentionally binds only to loopback; it is not a public hosting server.
 
 ```sh
 python3 -m unittest discover -s tests -p 'test_*.py' -v
-python3 evaluate.py --help
+python3 judge_check.py --output .runtime/judge-report.json
+python3 evaluate.py
 ```
 
-The reviewed candidate passed 94 development tests, including loopback HTTP tests and six new metadata-envelope regressions. Local socket permissions are required for HTTP tests. This count is not model accuracy.
+Choose a new output filename on each judge-check run; existing reports are preserved. Local socket permission is needed for HTTP tests. Installed Node enables the JavaScript logic tests; skips are reported explicitly, not counted as browser checks. See [JUDGE_FLOW.md](JUDGE_FLOW.md) for a reproducible walkthrough and `verification/public-check-summary.json` for this public candidate's measured checks. Regression tests and six authored scenes are **not model accuracy**.
 
-## Try the workflow
+## What to try
 
-1. Initial change: customer requests v2; driver still confirms v1; receipt leaves risk open.
-2. Explicit confirmation: all parties confirm the same full version/address/time.
-3. Withdrawn request: late acknowledgment cannot revive it.
-4. New agreement: complete v4 confirmation resolves the warning while preserving its history.
-5. Expand the editable synthetic-source workspace, save a source, create a scripted mock proposal, inspect the full quote/version/hash, and approve/reject/request clarification with a reason. Editing the source makes prior decisions stale.
-6. Inspect the legacy NVIDIA response. It is visibly labeled recorded replay and makes no new call. Export evidence or interpretation audit.
+1. **Initial change:** customer requests v2, driver confirms v1; receipt leaves the mismatch unresolved.
+2. **Complete confirmation:** all parties confirm the same full version/address/time; an agreement is recorded, not dispatched.
+3. **Withdrawal:** a late acknowledgement cannot revive the withdrawn request.
+4. **New agreement:** complete v4 confirmation resolves the warning but preserves the earlier sources and resolution history.
+5. **Editable synthetic-source workspace:** save a fictional source, generate a scripted mock, inspect the entire quote/version/hash, and approve, reject or request clarification with a reason. Editing the source makes earlier reviews stale.
+6. **Separate human-review panel:** load either an authored review example or authored acceptance practice. Both are explicitly scripted mocks, not model responses. A human-reported accept interpretation requires a current sole version, a meaningful reason and three explicit confirmations. It never promotes model acceptance or changes the shipment agreement. See [HUMAN_ACCEPT_WORKFLOW.md](HUMAN_ACCEPT_WORKFLOW.md).
+7. **Legacy NVIDIA review:** inspect the already-public recorded October 28 response. It makes no new call. Export the evidence or local interpretation audit.
 
-## Actual model evidence and limitations
+## NVIDIA Nemotron and Nebius Token Factory
 
-The historical provider was Nebius Token Factory, model `nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B`. There were 34 real synthetic requests: four early probes, 18 frozen v1 evaluation requests, 12 fresh frozen v2 requests. Calculated token-rate cost: US$0.00730644, not a tax-inclusive invoice or production estimate.
+The implemented provider adapter is in `provider.py`. Historical synthetic requests used Nebius Token Factory with `nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B` to propose wording classifications. Deterministic code binds evidence and maintains the agreement state. No model weights are trained, modified or bundled: inference was performed by the provider, not a local weight file.
 
-| Frozen evaluation | Complete cases | Complete observations | Fixed rules baseline |
+The revised wire contract asks for semantic labels and source-specific clarification. The application binds the complete original source, SHA-256, codepoint span and sole literal version to the outbound snapshot. A missing or competing version remains unresolved. Exact binding establishes integrity, not correct semantics or sender identity. There is no guessed action, silent model retry or live-to-mock fallback.
+
+**No new live call is made by the web UI or test suite.** The historical time-limited paid-call authorization has expired; the live CLI is intentionally paused. Keys are not bundled. Configuration flags do not authorize spending. Any new live run requires separately approved credentials, budget and protocol. Frozen v1.4 settings were temperature 0, max_tokens 1800, `chat_template_kwargs.enable_thinking=false`, no response_format. Acceptance of that parameter does not establish internal model behavior.
+
+## Honest model evidence and limitations
+
+Historical summaries report 34 synthetic requests: four early probes, 18 v1 evaluation requests and 12 v2 evaluation requests. The public detailed files retain all 30 frozen evaluation attempts and one early recorded probe; the other early probes are represented only in the aggregate summaries. Calculated cumulative token-rate cost was US$0.00730644, not a tax-inclusive invoice or production estimate.
+
+| Frozen set | Complete cases | Complete observations | Fixed-rule baseline |
 | --- | --- | --- | --- |
 | v1 | 0/18 | 0/28 | 15/18 cases; 25/28 observations |
 | v2 | 4/12 | 6/18 | 10/12 cases; 16/18 observations |
 
-These are different fixed synthetic sets, not proof of general improvement. v1 supplied inadequate version-only quotes, had three truncations and one validation rejection, and included a dangerous ambiguous-OK false acceptance. v2 returned seven evidence-valid observations but rejected seven cases and misclassified one receipt as unclear. No observed false acceptance among returned v2 observations is not a safety guarantee; coverage is low. The rules baseline is narrow and authored for the fixed comparison, not general language understanding.
+These are different fixed synthetic sets, not evidence of general improvement. v1 had inadequate version-only quotes, three truncations and one validation rejection, including an unsafe ambiguous-OK false acceptance. v2 returned seven evidence-valid observations, rejected seven cases and misclassified one receipt as unclear. No observed false acceptance among returned v2 observations is not a safety guarantee; coverage was low. The baseline is narrow, authored code rather than general language understanding.
 
-`evaluation/` preserves synthetic inputs, exact sanitized attempts and independently reported score summaries. Gold labels and the independent scorer are not distributed here; score reproduction therefore requires those separately. The current validator is not the frozen validator for either evaluation: do not rescore old attempts as new performance.
+**A separate, later frozen v1.5 twelve-case evaluation reported raw semantic results of 7/12 complete cases and 30/36 source labels, but 0/12 strict integrated cases.** This is not the v2 result above. Its underlying fresh-set inputs, labels and private audit are not included in this public release; these aggregate figures are reported, not independently reproduced here. The post-hoc v1.6 public human-review candidate has **no fresh independent model evaluation**. Retaining a suggestion or adding human review does not repair a benchmark score. The now-known evaluation set must not be reused as unseen evidence.
 
-v1.4.1 supports only a fixed `Sent <timezone-aware ISO timestamp>. Customer|Dispatcher|Driver: <complete payload>` presentation envelope. It can omit that header only with the entire remaining payload quoted; qualifications, forwarded text, injection markers and competing versions remain checked. Role labels confer no identity authority. This repair has development regression coverage but no fresh independent model evaluation.
+`evaluation/` and `evidence/live-probes-20261028/risk.json` retain the previously public synthetic evidence byte-for-byte. `evaluation_audit.py` checks archived input/attempt hashes and inventories failures without rescoring. Gold labels and the independent scorer are not distributed. Rejected raw model contents are absent, so some exact failure mechanisms cannot be reconstructed. The current validator is not the frozen validator for those evaluations. Do not rescore old attempts as new performance.
 
-## Provider boundary
+The public human-review panel uses newly authored mocks only; the private post-hoc diagnostic replay is deliberately not distributed or served. There is no private evaluation data, secret, usage ledger or model-weight requirement to run this test build.
 
-`provider.py` contains the adapter and structured evidence validation. Frozen v1.4 settings were temperature 0, max_tokens 1800, `chat_template_kwargs.enable_thinking=false`, and no response_format. Endpoint acceptance of the parameter is not proof of internal model behavior. No secret is bundled. Live CLI is intentionally paused; the historical time-limited budget has expired. Do not treat configuration flags or copied historical limits as permission to spend. Any new live run needs a separate budget and protocol.
+## Release and competition status
 
-## Delivery state
+Public source repository: <https://github.com/Declan-Cheng/freightswitch>. This tree provides a complete local test build. A judge-accessible hosted demo, a public video and formal competition submission are separate deliverables; their completion is not established by this source tree.
 
-Local prototype and synthetic evidence only. Public repository publication, judge-accessible hosting through December 15, a recorded public video under three minutes and formal competition submission require separate completion. No hosted judge demo or public video is provided by this package. No AI-superiority, production-safety, real-customer or prize claim.
+The intended competition track is **Best Apps and Agents**, using Nemotron through Nebius Token Factory. The [official rules](https://nebiusglobalaihackathon.devpost.com/rules) require a working demo/application/test-build URL, public open-source repository and a public YouTube demonstration under three minutes. Judging access must remain available through **December 23, 2026, 20:00 UTC** (12:00 Pacific Standard Time), not December 15. The entry deadline is October 30, 2026, 17:00 UTC. These requirements do not establish eligibility, submission acceptance or any prize outcome.
 
-MIT licensed; see LICENSE.
+MIT licensed; see [LICENSE](LICENSE). No AI-superiority, production-safety, real-customer or prize claim.

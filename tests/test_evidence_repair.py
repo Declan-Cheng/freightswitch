@@ -64,12 +64,12 @@ class EvidenceRepairTests(unittest.TestCase):
         def transport(payload):
             self.assertEqual(payload['chat_template_kwargs'],{'enable_thinking':False});self.assertEqual(payload['max_tokens'],1800);self.assertEqual(payload['temperature'],0)
             self.assertEqual(payload['messages'][0]['content'],SYSTEM_PROMPT);self.assertNotIn('response_format',payload)
-            return json.dumps(dict(model=MODEL,choices=[dict(finish_reason='stop',message={'content':json.dumps(output(body,'reject'))})],usage={})).encode()
+            return json.dumps(dict(model=MODEL,choices=[dict(finish_reason='stop',message={'content':json.dumps(dict(observations=[dict(messageId='dev-source',kind='reject',confidence=.5,explanation='Development-only classification.',question=None)]))})],usage={})).encode()
         result=Analyzer().analyze([document(body)],'live',env,transport)
         self.assertFalse(result['realInference'])
     def test_truncated_output_never_becomes_result_or_mock_fallback(self):
         body='I reject v7.';env=dict(NEBIUS_API_KEY='FAKE-ONLY',NEBIUS_MODEL=MODEL,FREIGHTSWITCH_ALLOW_LIVE='approved');count=[]
-        def transport(_):count.append(1);return json.dumps(dict(model=MODEL,choices=[dict(finish_reason='length',message={'content':json.dumps(output(body,'reject'))})])).encode()
+        def transport(_):count.append(1);return json.dumps(dict(model=MODEL,choices=[dict(finish_reason='length',message={'content':json.dumps(dict(observations=[dict(messageId='dev-source',kind='reject',confidence=.5,explanation='Development-only classification.',question=None)]))})])).encode()
         analyzer=Analyzer()
         with self.assertRaisesRegex(ProviderError,'Incomplete'):analyzer.analyze([document(body)],'live',env,transport)
         with self.assertRaises(ProviderError):analyzer.analyze([document(body)],'live',env,transport)

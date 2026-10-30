@@ -32,6 +32,7 @@ def evaluate(messages):
     def issue(code,text,m=None,question=None):
         item=dict(code=code,text=text,question=question,evidence=[proof(m)] if m and isinstance(m.get('body'),str) and isinstance(m.get('sha256'),str) else [],version=m.get('version') if m else None,sentAt=m.get('sentAt') if m else None)
         if item not in issues:issues.append(item)
+        return issues[issues.index(item)]
     for original in messages:
         if not isinstance(original,dict):issue('INVALID_MESSAGE','A message envelope is invalid.',question='Provide the original message and sender.');continue
         m=copy.deepcopy(original);ident=m.get('id')
@@ -75,7 +76,7 @@ def evaluate(messages):
     for group in groups.values():
         if len(group)>1:
             for m in group:simultaneous.add(m['id']);issue('AMBIGUOUS_ORDER','Simultaneous statements cannot be safely ordered.',m,'Which statement supersedes the other at this time?')
-    agreement=None;initial=None;latest_ack={};transitions=[]
+    agreement=None;initial=None;agreement_snapshot=None;initial_snapshot=None;latest_ack={};transitions=[]
     for m in rows:
         if m['id'] in simultaneous:continue
         kind=m['kind'];v=m['version'];entry=versions.get(v)
@@ -125,10 +126,16 @@ def evaluate(messages):
         if new=='accepted':latest_ack[party]=dict(version=v,evidence=[proof(m)],details=copy.deepcopy(entry['details']))
         # A delayed acknowledgment of an older version cannot replace the latest
         # proposed change. It remains evidence of an old instruction in use.
-        if v==order[-1] and all(p['status']=='accepted' for p in entry['parties'].values()):
+        if (v==order[-1] and all(p['status']=='accepted' for p in entry['parties'].values())
+                and all(latest_ack.get(p,{}).get('version')==v for p in PARTIES)):
             if agreement!=v:transitions.append(dict(type='confirmed',version=v,evidence=[e for p in entry['parties'].values() for e in p['evidence']]))
             agreement=v
-            if initial is None:initial=v
+            # Freeze the evidence that established this agreement. A later
+            # rejection/withdrawal changes current validity, not history.
+            agreement_snapshot=copy.deepcopy(entry)
+            agreement_snapshot['confirmedAt']=m['sentAt']
+            agreement_snapshot['confirmationMessageId']=m['id']
+            if initial is None:initial=v;initial_snapshot=copy.deepcopy(agreement_snapshot)
     active=next((v for v in reversed(order) if not versions[v]['revoked']),None)
     current=versions.get(active);risks=[]
     if not current:issue('NO_INSTRUCTION','No complete valid instruction is established.',question='Provide the original shipment instruction and three party confirmations.')
@@ -143,8 +150,13 @@ def evaluate(messages):
         for v,entry in versions.items():
             for party,response in entry['parties'].items():
                 if response['status']=='conflict':
-                    risks.append(dict(code='CONTRADICTION',party=party,text=PARTIES[party]+' has contradictory responses for '+v+'.',evidence=response['evidence']))
-                    issue('CONTRADICTION','Acceptance and rejection conflict for '+party+' / '+v+'.',question='Which response supersedes the other for '+party+' / '+v+'?')
+                    # Bind the warning to the latest conflicting source, so a
+                    # newer agreement can resolve it without erasing history.
+                    # Do not also add an evidence-free duplicate risk.
+                    last_conflict=by_id[response['evidence'][-1]['messageId']]
+                    warning=issue('CONTRADICTION','Acceptance and rejection conflict for '+party+' / '+v+'.',last_conflict,
+                                  'Which response supersedes the other for '+party+' / '+v+'?')
+                    warning['evidence']=copy.deepcopy(response['evidence'])
     # Retire only source-bound historical withdrawal warnings after a strictly
     # newer, later proposal is explicitly accepted by every party. Keep the
     # original warning and exact resolution evidence in the audit history.
@@ -152,7 +164,7 @@ def evaluate(messages):
     fully_current=bool(current and not current['revoked'] and all(p['status']=='accepted' for p in current['parties'].values()) and all(latest_ack.get(p,{}).get('version')==active for p in PARTIES))
     for item in issues:
         archived=copy.deepcopy(item);archived['status']='open'
-        if (fully_current and item['code'] in ('REVOKED_ACK','CONFIRMED_WITHDRAWAL','WITHDRAWN_AFTER_ACK')
+        if (fully_current and item['code'] in ('REVOKED_ACK','CONFIRMED_WITHDRAWAL','WITHDRAWN_AFTER_ACK','CONTRADICTION')
                 and item['version'] in versions and int(active[1:])>int(item['version'][1:])
                 and item['sentAt'] and stamp(current['sentAt'])>stamp(item['sentAt'])):
             archived['status']='resolved'
@@ -165,9 +177,23 @@ def evaluate(messages):
     # Revoked/latest instruction uncertainty must remain visible even when the
     # previous request has unanimous historical acceptance.
     cleared=bool(current and all(p['status']=='accepted' for p in current['parties'].values()) and not risks)
+    agreement_view=copy.deepcopy(agreement_snapshot)
+    agreement_validity=None
+    if agreement_view:
+        present=versions[agreement]
+        party_statuses={p:response['status'] for p,response in present['parties'].items()}
+        validity=('revoked' if present['revoked'] else 'disputed' if any(s!='accepted' for s in party_statuses.values())
+                  else 'current' if cleared and agreement==active else 'historical')
+        agreement_validity=dict(status=validity,revoked=present['revoked'],partyStatuses=party_statuses,
+                                currentVersion=active,instructionRiskOpen=not cleared)
+        # Compatibility: revoked/withdrawal have always described current
+        # validity. Confirmation-time parties/details/proofs remain frozen.
+        agreement_view['revoked']=present['revoked']
+        agreement_view['withdrawal']=copy.deepcopy(present['withdrawal'])
+        agreement_view['historicalConfirmation']=True
     return dict(shipment=SHIPMENT,synthetic=True,interpretation='Manually reviewed synthetic typed events; deterministic authority reducer. No live AI.',
                 status='ALIGNED' if cleared else ('CLARIFY' if issues else 'AT_RISK'),activeVersion=active,
-                agreement=copy.deepcopy(versions.get(agreement)),originalAgreement=copy.deepcopy(versions.get(initial)),
+                agreement=agreement_view,agreementValidity=agreement_validity,originalAgreement=copy.deepcopy(initial_snapshot),
                 proposed=copy.deepcopy(current),versions=[copy.deepcopy(versions[v]) for v in order],latestAcknowledgments=latest_ack,
                 warningHistory=warning_history,resolvedWarnings=[w for w in warning_history if w['status']=='resolved'],
                 risks=risks,clarifications=[i['question'] for i in issues if i['question']],transitions=transitions,evidence=evidence,

@@ -53,7 +53,7 @@ class LocalAPITests(unittest.TestCase):
         with patch('provider.Analyzer.analyze',side_effect=AssertionError('No provider call allowed')):
             code,body,headers=self.req('/api/export?count=8&review=recorded')
         exported=json.loads(body);self.assertEqual(code,200);self.assertIn('attachment;',headers['Content-Disposition'])
-        self.assertTrue(exported['realInference']);self.assertTrue(exported['recordedReplay']);self.assertEqual(exported['state']['status'],'AT_RISK')
+        self.assertEqual(exported['buildId'],json.loads(self.req('/api/health')[1])['buildId']);self.assertEqual(exported['sourceDigest'],json.loads(self.req('/api/health')[1])['sourceDigest']);self.assertEqual(exported['visibleCount'],8);self.assertEqual(exported['scenario'],'risk');self.assertTrue(exported['realInference']);self.assertTrue(exported['recordedReplay']);self.assertEqual(exported['state']['status'],'AT_RISK')
         self.assertEqual(len(exported['messages']),8);self.assertEqual(len(exported['advisory']['observations']),3)
         self.assertEqual(self.req('/api/export?count=4&review=recorded')[0],400)
         self.assertFalse(json.loads(self.req('/api/export?count=19')[1])['realInference'])
@@ -67,8 +67,8 @@ class LocalAPITests(unittest.TestCase):
         code,raw,_=self.req('/api/review/decision',data,headers);self.assertEqual(code,200);self.assertFalse(json.loads(raw)['entry']['agreementChanged'])
         self.assertEqual(self.req('/api/review/decision',data,headers)[1],raw)
         self.assertEqual(self.req('/api/review/propose',dict(sourceId=source['id'],sourceRevision=source['revisionId'],mode='live'),headers)[0],400)
-        code,export,metadata=self.req('/api/review/export');self.assertEqual(code,200);self.assertIn('FreightSwitch-interpretation-audit.json',metadata['Content-Disposition']);self.assertEqual(len(json.loads(export)['audit']),1)
+        code,export,metadata=self.req('/api/review/export');self.assertEqual(code,200);self.assertIn('FreightSwitch-interpretation-audit.json',metadata['Content-Disposition']);self.assertEqual(len(json.loads(export)['audit']),1);self.assertEqual(json.loads(export)['sourceDigest'],json.loads(self.req('/api/health')[1])['sourceDigest'])
         self.assertEqual(json.loads(self.req('/api/state?count=8')[1])['state']['agreement']['version'],'v1')
-        health=json.loads(self.req('/api/health')[1]);self.assertTrue(health['buildId'].startswith('FS-1.4.1-'));self.assertEqual(health['webInferenceCalls'],0)
+        health=json.loads(self.req('/api/health')[1]);self.assertTrue(health['buildId'].startswith('FS-1.6-public-'));self.assertEqual(health['webInferenceCalls'],0)
 
 if __name__=='__main__':unittest.main(verbosity=2)

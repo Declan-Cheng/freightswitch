@@ -1,0 +1,31 @@
+{
+  "format": "freightswitch-offline-judge-check-v1",
+  "buildId": "FS-1.6-public-22bb8d9b977b",
+  "sourceDigest": "22bb8d9b977bc99dbbcf08d925bcaf2c3d63830ab4236f99ea81f578d3e7c902",
+  "checkedUTC": "2026-10-30T02:22:48.884701+00:00",
+  "passed": true,
+  "authoredScenarios": {
+    "passed": 6,
+    "total": 6,
+    "modelQuality": null
+  },
+  "realModelCallsExecuted": 0,
+  "freshHeldOutModelScore": null,
+  "developmentTests": {
+    "run": 201,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "pythonCompilation": "passed",
+  "javascriptSyntax": "passed",
+  "historicalEvidenceIntegrity": true,
+  "pythonVersion": "3.12.14",
+  "nodeVersion": "v24.22.1",
+  "browserVisualQA": "not established by these checks; JavaScript uses DOM/fetch doubles",
+  "publicHistoricalEvidenceChanged": false,
+  "privateDiagnosticReplayIncluded": false,
+  "authoredExamplesAreModelEvidence": false,
+  "modelWeightsBundled": false,
+  "notice": "Offline development tests and authored scenarios only; not model accuracy, deployment, formal submission or shipment authorization."
+}

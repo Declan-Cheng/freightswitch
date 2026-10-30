@@ -12,7 +12,7 @@ class ProviderTests(unittest.TestCase):
     def raw(self):return dict(observations=[dict(messageId='m02',kind='accept',version='v1',quote=self.messages[1]['body'],confidence=.8,explanation='Advisory only'),dict(messageId='m01',kind='propose',version='v1',quote=self.messages[0]['body'],confidence=.8,explanation='Advisory only')],questions=[])
     def transport(self,payload):
         self.assertNotIn('response_format',payload);self.assertEqual(payload['model'],MODEL)
-        return json.dumps(dict(model=MODEL,choices=[dict(finish_reason='stop',message=dict(content=json.dumps(self.raw())))],usage=dict(prompt_tokens=100,completion_tokens=30))).encode()
+        return json.dumps(dict(model=MODEL,choices=[dict(finish_reason='stop',message=dict(content=json.dumps(dict(observations=[{**{k:r[k] for k in ('messageId','kind','confidence','explanation')},'question':None} for r in self.raw()['observations']]))))],usage=dict(prompt_tokens=100,completion_tokens=30))).encode()
     def test_mock_is_explicit_never_model_or_state_authority(self):
         r=Analyzer().analyze(self.messages);self.assertEqual(r['mode'],'mock');self.assertFalse(r['realInference']);self.assertIsNone(r['model']);self.assertTrue(r['proposalOnly'])
     def test_live_without_gates_fails_before_transport(self):
